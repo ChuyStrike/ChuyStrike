@@ -6,9 +6,11 @@
     <meta name="description" content="Portafolio profesional - Desarrollador Full Stack">
     <title>Santiago - Portafolio Profesional</title>
     
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/styles.css">
-</head>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/styles.css">    
+    <!-- Motion (Framer Motion para Vanilla JS) -->
+    <script src="https://cdn.jsdelivr.net/npm/motion@10.16.4"></script></head>
 <body>
     <!-- Header/Navbar -->
     <header class="header">
@@ -35,12 +37,12 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="hero" id="home">
+        <section class="hero hero--animated" id="home">
             <div class="container">
-                <div class="hero__content">
-                    <h2 class="hero__title">Desarrollador Full Stack</h2>
-                    <p class="hero__subtitle">Transformo ideas en soluciones digitales de calidad</p>
-                    <div class="hero__buttons">
+                <div class="hero__content hero__content--animated">
+                    <h2 class="hero__title hero__title--animated">Desarrollador Full Stack</h2>
+                    <p class="hero__subtitle hero__subtitle--animated">Transformo ideas en soluciones digitales de calidad</p>
+                    <div class="hero__buttons hero__buttons--animated">
                         <a href="#projects" class="button button--primary">Ver Proyectos</a>
                         <a href="#contact" class="button button--secondary">Contáctame</a>
                     </div>

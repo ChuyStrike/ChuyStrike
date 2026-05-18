@@ -283,6 +283,13 @@ body {
     color: var(--color-white);
 }
 
+/* Efecto ripple en botones (compatible con Motion) */
+.button,
+.link-button {
+    position: relative;
+    overflow: hidden;
+}
+
 /* ============================================
    SECCIONES
    ============================================ */

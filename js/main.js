@@ -1,7 +1,107 @@
 /**
  * Main.js - Funcionalidad principal del portafolio
  * Estructura modular y reutilizable
+ * Con animaciones Framer Motion (Motion)
  */
+
+// ============================================
+// MÓDULO: ANIMACIONES CON MOTION (FRAMER)
+// ============================================
+
+const MotionAnimationModule = (() => {
+    /**
+     * Inicializa animaciones con Motion
+     */
+    const init = () => {
+        animateHero();
+        animateOnScroll();
+    };
+
+    /**
+     * Anima la sección Hero al cargar
+     */
+    const animateHero = () => {
+        const { animate } = window.Motion;
+
+        // Animar título
+        const title = document.querySelector('.hero__title--animated');
+        if (title) {
+            title.style.opacity = '0';
+            title.style.transform = 'translateY(20px)';
+            
+            animate(
+                title,
+                { opacity: 1, transform: 'translateY(0)' },
+                { duration: 0.8, delay: 0.2 }
+            );
+        }
+
+        // Animar subtítulo
+        const subtitle = document.querySelector('.hero__subtitle--animated');
+        if (subtitle) {
+            subtitle.style.opacity = '0';
+            subtitle.style.transform = 'translateY(20px)';
+            
+            animate(
+                subtitle,
+                { opacity: 1, transform: 'translateY(0)' },
+                { duration: 0.8, delay: 0.4 }
+            );
+        }
+
+        // Animar botones
+        const buttons = document.querySelector('.hero__buttons--animated');
+        if (buttons) {
+            buttons.style.opacity = '0';
+            buttons.style.transform = 'translateY(20px)';
+            
+            animate(
+                buttons,
+                { opacity: 1, transform: 'translateY(0)' },
+                { duration: 0.8, delay: 0.6 }
+            );
+        }
+    };
+
+    /**
+     * Anima tarjetas al entrar en vista
+     */
+    const animateOnScroll = () => {
+        const { animate } = window.Motion;
+
+        const cards = document.querySelectorAll(
+            '.skill-card, .project-card'
+        );
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(30px)';
+
+                    animate(
+                        entry.target,
+                        { opacity: 1, transform: 'translateY(0)' },
+                        { duration: 0.6, ease: 'easeOut' }
+                    );
+
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        cards.forEach(card => observer.observe(card));
+    };
+
+    return {
+        init
+    };
+})();
 
 // ============================================
 // MÓDULO: NAVEGACIÓN MÓVIL
@@ -178,7 +278,8 @@ const UtilsModule = (() => {
         const features = {
             intersectionObserver: 'IntersectionObserver' in window,
             fetch: 'fetch' in window,
-            localStorage: 'localStorage' in window
+            localStorage: 'localStorage' in window,
+            motion: 'Motion' in window
         };
         return features[featureName] || false;
     };
@@ -198,21 +299,22 @@ const App = (() => {
      * Inicializa todos los módulos
      */
     const init = () => {
-        // Verificar soporte de IntersectionObserver
-        if (UtilsModule.isSupported('intersectionObserver')) {
-            ScrollAnimationModule.init();
+        // Esperar a que Motion esté disponible
+        if (UtilsModule.isSupported('motion')) {
+            MotionAnimationModule.init();
+            UtilsModule.log('Motion (Framer Motion) cargado ✨');
         } else {
-            // Fallback para navegadores antiguos
             UtilsModule.log(
-                'IntersectionObserver no soportado',
+                'Motion no disponible, usando animaciones CSS',
                 'warn'
             );
+            ScrollAnimationModule.init();
         }
 
         NavigationModule.init();
         SmoothScrollModule.init();
 
-        UtilsModule.log('Portafolio cargado correctamente');
+        UtilsModule.log('Portafolio cargado correctamente 🚀');
     };
 
     return {
@@ -226,3 +328,4 @@ if (document.readyState === 'loading') {
 } else {
     App.init();
 }
+
