@@ -1,0 +1,484 @@
+/* 
+ * EJEMPLOS DE EXTENSIÓN DEL PORTAFOLIO
+ * Usa estos patrones para agregar nuevas funcionalidades
+ */
+
+/* ============================================
+   EJEMPLO 1: NUEVA SECCIÓN (Blog)
+   ============================================ */
+
+/* En index.html agregar: */
+/*
+<section class="blog" id="blog">
+    <div class="container">
+        <h2 class="section-title">Últimas Publicaciones</h2>
+        
+        <div class="blog__grid">
+            <article class="blog-post">
+                <div class="blog-post__header">
+                    <h3 class="blog-post__title">Título del artículo</h3>
+                    <time class="blog-post__date" datetime="2026-05-18">18 de mayo, 2026</time>
+                </div>
+                <p class="blog-post__excerpt">Extracto del artículo...</p>
+                <a href="blog/articulo.html" class="blog-post__link">Leer más →</a>
+            </article>
+        </div>
+    </div>
+</section>
+*/
+
+/* En styles.css agregar: */
+
+.blog {
+    background-color: var(--color-white);
+}
+
+.blog__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-2xl);
+}
+
+.blog-post {
+    background-color: var(--color-gray-50);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+    border-left: 4px solid var(--color-primary);
+    transition: all var(--transition-base);
+}
+
+.blog-post:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateX(8px);
+}
+
+.blog-post__header {
+    margin-bottom: var(--spacing-lg);
+}
+
+.blog-post__title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-sm);
+}
+
+.blog-post__date {
+    font-size: var(--font-size-sm);
+    color: var(--color-secondary);
+}
+
+.blog-post__excerpt {
+    color: var(--color-gray-700);
+    margin-bottom: var(--spacing-lg);
+    line-height: var(--line-height-relaxed);
+}
+
+.blog-post__link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    transition: all var(--transition-base);
+}
+
+.blog-post__link:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+}
+
+/* ============================================
+   EJEMPLO 2: TESTIMONIOS
+   ============================================ */
+
+/* En index.html agregar: */
+/*
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <h2 class="section-title">Lo que dicen sobre mí</h2>
+        
+        <div class="testimonials__grid">
+            <div class="testimonial-card">
+                <p class="testimonial-card__quote">"Excelente trabajo y muy profesional"</p>
+                <div class="testimonial-card__author">
+                    <strong class="testimonial-card__name">Juan Pérez</strong>
+                    <span class="testimonial-card__role">CEO, Empresa XYZ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+*/
+
+.testimonials {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-white);
+}
+
+.testimonials .section-title,
+.testimonials .section-title::after {
+    color: var(--color-white);
+    background-color: var(--color-white);
+}
+
+.testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-2xl);
+}
+
+.testimonial-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all var(--transition-base);
+}
+
+.testimonial-card:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.testimonial-card__quote {
+    font-size: var(--font-size-lg);
+    font-style: italic;
+    margin-bottom: var(--spacing-lg);
+    line-height: var(--line-height-relaxed);
+}
+
+.testimonial-card__author {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.testimonial-card__name {
+    font-weight: var(--font-weight-bold);
+}
+
+.testimonial-card__role {
+    font-size: var(--font-size-sm);
+    opacity: 0.9;
+}
+
+/* ============================================
+   EJEMPLO 3: TIMELINE DE EXPERIENCIA
+   ============================================ */
+
+/* En index.html agregar: */
+/*
+<section class="experience" id="experience">
+    <div class="container">
+        <h2 class="section-title">Experiencia</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-item__dot"></div>
+                <div class="timeline-item__content">
+                    <h3 class="timeline-item__title">Puesto</h3>
+                    <p class="timeline-item__company">Empresa</p>
+                    <time class="timeline-item__date">2024 - Presente</time>
+                    <p class="timeline-item__description">Descripción...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+*/
+
+.timeline {
+    position: relative;
+    padding: var(--spacing-2xl) 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--color-primary);
+}
+
+@media (min-width: var(--bp-md)) {
+    .timeline::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.timeline-item {
+    margin-bottom: var(--spacing-3xl);
+    position: relative;
+}
+
+.timeline-item__dot {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-primary);
+    border: 4px solid var(--color-white);
+    border-radius: 50%;
+    top: 0;
+    left: -9px;
+    box-shadow: 0 0 0 4px var(--color-gray-50);
+}
+
+@media (min-width: var(--bp-md)) {
+    .timeline-item {
+        width: 50%;
+        margin-bottom: var(--spacing-2xl);
+    }
+
+    .timeline-item:nth-child(odd) {
+        margin-left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+        margin-left: auto;
+        text-align: right;
+    }
+
+    .timeline-item:nth-child(even) .timeline-item__dot {
+        left: auto;
+        right: -9px;
+    }
+}
+
+.timeline-item__content {
+    background-color: var(--color-gray-50);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    margin-left: var(--spacing-lg);
+}
+
+@media (min-width: var(--bp-md)) {
+    .timeline-item:nth-child(odd) .timeline-item__content {
+        margin-left: 0;
+        margin-right: var(--spacing-lg);
+    }
+
+    .timeline-item:nth-child(even) .timeline-item__content {
+        margin-left: 0;
+        margin-right: var(--spacing-lg);
+    }
+}
+
+.timeline-item__title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-xs);
+}
+
+.timeline-item__company {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-xs);
+}
+
+.timeline-item__date {
+    display: block;
+    font-size: var(--font-size-sm);
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.timeline-item__description {
+    color: var(--color-gray-700);
+    line-height: var(--line-height-relaxed);
+}
+
+/* ============================================
+   EJEMPLO 4: MÓDULO JAVASCRIPT PARA MODAL
+   ============================================ */
+
+/*
+const ModalModule = (() => {
+    const openButtons = document.querySelectorAll('[data-modal-open]');
+    const closeButtons = document.querySelectorAll('[data-modal-close]');
+    const modals = document.querySelectorAll('.modal');
+
+    const init = () => {
+        openButtons.forEach(button => {
+            button.addEventListener('click', openModal);
+        });
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', closeModal);
+        });
+
+        document.addEventListener('keydown', handleEscKey);
+    };
+
+    const openModal = (event) => {
+        const modalId = event.target.getAttribute('data-modal-open');
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+        }
+    };
+
+    const closeModal = (event) => {
+        const modal = event.target.closest('.modal');
+        if (modal) {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+        }
+    };
+
+    const handleEscKey = (event) => {
+        if (event.key === 'Escape') {
+            modals.forEach(modal => {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+            });
+        }
+    };
+
+    return { init };
+})();
+
+// En App.init() agregar:
+// ModalModule.init();
+*/
+
+/* CSS para Modal */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: var(--z-modal);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal__content {
+    background-color: var(--color-white);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    animation: modalSlideIn var(--transition-base);
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal__close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: none;
+    border: none;
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    color: var(--color-gray-600);
+    transition: color var(--transition-base);
+}
+
+.modal__close:hover {
+    color: var(--color-gray-900);
+}
+
+/* ============================================
+   EJEMPLO 5: ANIMACIONES AVANZADAS
+   ============================================ */
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+.animate-bounce {
+    animation: bounce 1s infinite;
+}
+
+/* ============================================
+   COLORES ADICIONALES (Variables.css)
+   ============================================ */
+
+/*
+:root {
+    /* Nuevos colores para casos de uso específicos */
+    --color-success-light: #d1fae5;
+    --color-error-light: #fee2e2;
+    --color-warning-light: #fef3c7;
+    --color-info: #0ea5e9;
+    --color-info-light: #cffafe;
+}
+*/
+
+/* ============================================
+   TIPOGRAFÍA ADICIONAL
+   ============================================ */
+
+/*
+:root {
+    --font-size-5xl: 3rem;
+    --font-size-6xl: 3.75rem;
+    --font-weight-extrabold: 800;
+    --letter-spacing-tight: -0.02em;
+    --letter-spacing-wide: 0.05em;
+}
+*/

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portafolio profesional - Desarrollador Full Stack">
+    <title>Santiago - Portafolio Profesional</title>
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header class="header">
+        <nav class="header__nav">
+            <div class="header__logo-container">
+                <h1 class="header__logo">Santiago</h1>
+            </div>
+            
+            <button class="header__menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+                <span class="header__menu-line"></span>
+                <span class="header__menu-line"></span>
+                <span class="header__menu-line"></span>
+            </button>
+            
+            <ul class="header__menu" id="navMenu">
+                <li class="header__menu-item"><a href="#home" class="header__link">Inicio</a></li>
+                <li class="header__menu-item"><a href="#about" class="header__link">Sobre Mí</a></li>
+                <li class="header__menu-item"><a href="#skills" class="header__link">Habilidades</a></li>
+                <li class="header__menu-item"><a href="#projects" class="header__link">Proyectos</a></li>
+                <li class="header__menu-item"><a href="#contact" class="header__link">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero__content">
+                    <h2 class="hero__title">Desarrollador Full Stack</h2>
+                    <p class="hero__subtitle">Transformo ideas en soluciones digitales de calidad</p>
+                    <div class="hero__buttons">
+                        <a href="#projects" class="button button--primary">Ver Proyectos</a>
+                        <a href="#contact" class="button button--secondary">Contáctame</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="container">
+                <h2 class="section-title">Sobre Mí</h2>
+                
+                <div class="about__content">
+                    <div class="about__text">
+                        <p class="about__paragraph">
+                            Soy un desarrollador apasionado con experiencia en tecnologías modernas. 
+                            Me encanta crear aplicaciones web intuitivas y eficientes que resuelvan 
+                            problemas reales.
+                        </p>
+                        <p class="about__paragraph">
+                            Con enfoque en código limpio, buenas prácticas y experiencia del usuario, 
+                            trabajo para entregar soluciones que no solo funcionan bien, sino que también 
+                            son mantenibles y escalables.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills" id="skills">
+            <div class="container">
+                <h2 class="section-title">Habilidades</h2>
+                
+                <div class="skills__grid">
+                    <!-- Frontend Skills -->
+                    <article class="skill-card">
+                        <h3 class="skill-card__title">Frontend</h3>
+                        <ul class="skill-card__list">
+                            <li class="skill-card__item">HTML5 & CSS3</li>
+                            <li class="skill-card__item">JavaScript (ES6+)</li>
+                            <li class="skill-card__item">React / Vue.js</li>
+                            <li class="skill-card__item">Responsive Design</li>
+                        </ul>
+                    </article>
+
+                    <!-- Backend Skills -->
+                    <article class="skill-card">
+                        <h3 class="skill-card__title">Backend</h3>
+                        <ul class="skill-card__list">
+                            <li class="skill-card__item">Node.js / Express</li>
+                            <li class="skill-card__item">Bases de Datos (SQL/NoSQL)</li>
+                            <li class="skill-card__item">APIs RESTful</li>
+                            <li class="skill-card__item">Autenticación & Seguridad</li>
+                        </ul>
+                    </article>
+
+                    <!-- Tools Skills -->
+                    <article class="skill-card">
+                        <h3 class="skill-card__title">Herramientas</h3>
+                        <ul class="skill-card__list">
+                            <li class="skill-card__item">Git & GitHub</li>
+                            <li class="skill-card__item">Docker</li>
+                            <li class="skill-card__item">VS Code</li>
+                            <li class="skill-card__item">Metodologías Ágiles</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects" id="projects">
+            <div class="container">
+                <h2 class="section-title">Proyectos Destacados</h2>
+                
+                <div class="projects__grid">
+                    <!-- Project 1 -->
+                    <article class="project-card">
+                        <div class="project-card__image project-card__image--placeholder"></div>
+                        
+                        <div class="project-card__content">
+                            <h3 class="project-card__title">Proyecto 1</h3>
+                            <p class="project-card__description">
+                                Descripción del proyecto. Tecnologías utilizadas y desafíos resueltos.
+                            </p>
+                            
+                            <ul class="project-card__tags">
+                                <li class="project-card__tag">React</li>
+                                <li class="project-card__tag">Node.js</li>
+                                <li class="project-card__tag">MongoDB</li>
+                            </ul>
+                            
+                            <div class="project-card__links">
+                                <a href="#" class="link-button link-button--primary">Ver Proyecto</a>
+                                <a href="#" class="link-button link-button--secondary">Código</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="project-card">
+                        <div class="project-card__image project-card__image--placeholder"></div>
+                        
+                        <div class="project-card__content">
+                            <h3 class="project-card__title">Proyecto 2</h3>
+                            <p class="project-card__description">
+                                Descripción del proyecto. Tecnologías utilizadas y desafíos resueltos.
+                            </p>
+                            
+                            <ul class="project-card__tags">
+                                <li class="project-card__tag">Vue.js</li>
+                                <li class="project-card__tag">Firebase</li>
+                                <li class="project-card__tag">Tailwind</li>
+                            </ul>
+                            
+                            <div class="project-card__links">
+                                <a href="#" class="link-button link-button--primary">Ver Proyecto</a>
+                                <a href="#" class="link-button link-button--secondary">Código</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="project-card">
+                        <div class="project-card__image project-card__image--placeholder"></div>
+                        
+                        <div class="project-card__content">
+                            <h3 class="project-card__title">Proyecto 3</h3>
+                            <p class="project-card__description">
+                                Descripción del proyecto. Tecnologías utilizadas y desafíos resueltos.
+                            </p>
+                            
+                            <ul class="project-card__tags">
+                                <li class="project-card__tag">JavaScript</li>
+                                <li class="project-card__tag">API REST</li>
+                                <li class="project-card__tag">CSS3</li>
+                            </ul>
+                            
+                            <div class="project-card__links">
+                                <a href="#" class="link-button link-button--primary">Ver Proyecto</a>
+                                <a href="#" class="link-button link-button--secondary">Código</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <h2 class="section-title">Contacto</h2>
+                
+                <div class="contact__content">
+                    <p class="contact__text">
+                        ¿Tienes un proyecto en mente? Me encantaría escucharte. 
+                        Contáctame a través de cualquiera de estos canales:
+                    </p>
+                    
+                    <ul class="contact__links">
+                        <li class="contact__link-item">
+                            <a href="mailto:tu@email.com" class="contact__link">✉️ Email</a>
+                        </li>
+                        <li class="contact__link-item">
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact__link">💼 LinkedIn</a>
+                        </li>
+                        <li class="contact__link-item">
+                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact__link">💻 GitHub</a>
+                        </li>
+                        <li class="contact__link-item">
+                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="contact__link">𝕏 Twitter</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__text">&copy; 2026 Santiago. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
