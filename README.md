@@ -6,10 +6,14 @@
 portafolio/
 ├── index.html           # HTML semántico principal
 ├── css/
+|   ├── reset.css    # reset general
 │   ├── variables.css    # Variables CSS globales
-│   └── styles.css       # Estilos con metodología BEM
+│   └── main.css       # Estilos con metodología BEM
 ├── js/
 │   └── main.js          # Funcionalidad modular
+├── multimedia/
+│   ├── videos/      # videos   
+│   └── imagenes/          # imagenes
 └── pages/               # (Futuras páginas internas)
 ```
 
