@@ -1,78 +1,17 @@
 /**
  * Main.js - Funcionalidad principal del portafolio
  * Estructura modular y reutilizable
- * Con animaciones Framer Motion (Motion)
  */
 
 // ============================================
-// MÓDULO: ANIMACIONES CON MOTION (FRAMER)
+// MÓDULO: ANIMACIONES DE SCROLL
 // ============================================
 
-const MotionAnimationModule = (() => {
+const ScrollAnimationModule = (() => {
     /**
-     * Inicializa animaciones con Motion
+     * Observa elementos y los anima cuando entran en vista
      */
     const init = () => {
-        animateHero();
-        animateOnScroll();
-    };
-
-    /**
-     * Anima la sección Hero al cargar
-     */
-    const animateHero = () => {
-        const { animate } = window.Motion;
-
-        // Animar título
-        const title = document.querySelector('.hero__title--animated');
-        if (title) {
-            title.style.opacity = '0';
-            title.style.transform = 'translateY(20px)';
-            
-            animate(
-                title,
-                { opacity: 1, transform: 'translateY(0)' },
-                { duration: 0.8, delay: 0.2 }
-            );
-        }
-
-        // Animar subtítulo
-        const subtitle = document.querySelector('.hero__subtitle--animated');
-        if (subtitle) {
-            subtitle.style.opacity = '0';
-            subtitle.style.transform = 'translateY(20px)';
-            
-            animate(
-                subtitle,
-                { opacity: 1, transform: 'translateY(0)' },
-                { duration: 0.8, delay: 0.4 }
-            );
-        }
-
-        // Animar botones
-        const buttons = document.querySelector('.hero__buttons--animated');
-        if (buttons) {
-            buttons.style.opacity = '0';
-            buttons.style.transform = 'translateY(20px)';
-            
-            animate(
-                buttons,
-                { opacity: 1, transform: 'translateY(0)' },
-                { duration: 0.8, delay: 0.6 }
-            );
-        }
-    };
-
-    /**
-     * Anima tarjetas al entrar en vista
-     */
-    const animateOnScroll = () => {
-        const { animate } = window.Motion;
-
-        const cards = document.querySelectorAll(
-            '.skill-card, .project-card'
-        );
-
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -81,21 +20,23 @@ const MotionAnimationModule = (() => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '0';
-                    entry.target.style.transform = 'translateY(30px)';
-
-                    animate(
-                        entry.target,
-                        { opacity: 1, transform: 'translateY(0)' },
-                        { duration: 0.6, ease: 'easeOut' }
-                    );
-
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        cards.forEach(card => observer.observe(card));
+        // Observar todas las tarjetas
+        const cards = document.querySelectorAll(
+            '.skill-card, .project-card'
+        );
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all var(--transition-slow)';
+            observer.observe(card);
+        });
     };
 
     return {
@@ -171,39 +112,32 @@ const NavigationModule = (() => {
 })();
 
 // ============================================
-// MÓDULO: ANIMACIONES DE SCROLL
+// MÓDULO: THEME TOGGLE DE PRUEBA
 // ============================================
 
-const ScrollAnimationModule = (() => {
-    /**
-     * Observa elementos y los anima cuando entran en vista
-     */
+const ThemeToggleModule = (() => {
+    const button = document.getElementById('themeToggle');
+
+    const setTheme = (theme) => {
+        document.body.dataset.theme = theme;
+        localStorage.setItem('theme', theme);
+        button.textContent = theme === 'dark' ? 'Tema: Oscuro' : 'Tema: Claro';
+    };
+
+    const toggleTheme = () => {
+        const currentTheme = document.body.dataset.theme === 'dark' ? 'dark' : 'light';
+        const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(nextTheme);
+    };
+
     const init = () => {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        if (!button) return;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
+        const storedTheme = localStorage.getItem('theme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        setTheme(storedTheme || systemTheme);
 
-        // Observar todas las tarjetas
-        const cards = document.querySelectorAll(
-            '.skill-card, .project-card'
-        );
-        cards.forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'all var(--transition-slow)';
-            observer.observe(card);
-        });
+        button.addEventListener('click', toggleTheme);
     };
 
     return {
@@ -278,8 +212,7 @@ const UtilsModule = (() => {
         const features = {
             intersectionObserver: 'IntersectionObserver' in window,
             fetch: 'fetch' in window,
-            localStorage: 'localStorage' in window,
-            motion: 'Motion' in window
+            localStorage: 'localStorage' in window
         };
         return features[featureName] || false;
     };
@@ -299,22 +232,22 @@ const App = (() => {
      * Inicializa todos los módulos
      */
     const init = () => {
-        // Esperar a que Motion esté disponible
-        if (UtilsModule.isSupported('motion')) {
-            MotionAnimationModule.init();
-            UtilsModule.log('Motion (Framer Motion) cargado ✨');
+        // Verificar soporte de IntersectionObserver
+        if (UtilsModule.isSupported('intersectionObserver')) {
+            ScrollAnimationModule.init();
         } else {
+            // Fallback para navegadores antiguos
             UtilsModule.log(
-                'Motion no disponible, usando animaciones CSS',
+                'IntersectionObserver no soportado',
                 'warn'
             );
-            ScrollAnimationModule.init();
         }
 
+        ThemeToggleModule.init();
         NavigationModule.init();
         SmoothScrollModule.init();
 
-        UtilsModule.log('Portafolio cargado correctamente 🚀');
+        UtilsModule.log('Portafolio cargado correctamente');
     };
 
     return {
