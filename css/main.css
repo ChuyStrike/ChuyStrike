@@ -29,6 +29,7 @@
 }
 
 .header__nav {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,12 +38,55 @@
     margin: 0 auto;
     padding-left: var(--spacing-md);
     padding-right: var(--spacing-md);
+    gap: var(--spacing-md);
 }
 
 @media (min-width: var(--bp-sm)) {
     .header__nav {
         padding-left: var(--spacing-lg);
         padding-right: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 767px) {
+    .header__nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .header__logo-container {
+        width: 100%;
+    }
+
+    .header__actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .header__menu-toggle {
+        margin-left: auto;
+    }
+
+    .header__menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: var(--z-sticky);
+    }
+
+    .header__menu.active {
+        display: flex;
+    }
+
+    .header__menu-item {
+        width: 100%;
+    }
+
+    .header__link,
+    .header__theme-item .theme-toggle {
+        padding: var(--spacing-md);
     }
 }
 
@@ -64,7 +108,8 @@
     border: none;
     cursor: pointer;
     padding: var(--spacing-sm);
-    margin-right: calc(var(--spacing-md) * -1);
+    margin: 0;
+    margin-left: auto;
 }
 
 .header__subtitulo {
@@ -77,6 +122,16 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
+}
+
+.header__theme-item {
+    width: 100%;
+}
+
+.header__theme-item .theme-toggle {
+    width: 100%;
+    text-align: left;
+    justify-content: flex-start;
 }
 
 .theme-toggle {
@@ -132,6 +187,7 @@
     flex-direction: column;
     padding: var(--spacing-md);
     gap: var(--spacing-sm);
+    z-index: var(--z-sticky);
 }
 
 .header__menu.active {
@@ -147,6 +203,33 @@
         flex-direction: row;
         gap: var(--spacing-xl);
         padding-left: var(--spacing-2xl);
+        max-height: none;
+        opacity: 1;
+    }
+}
+
+@media (max-width: 767px) {
+    .header__menu {
+        border-top: 1px solid var(--color-gray-200);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height var(--transition-base), opacity var(--transition-base);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .header__menu.active {
+        max-height: 500px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .header__menu-item {
+        width: 100%;
+    }
+
+    .header__link {
+        padding: var(--spacing-md);
     }
 }
 

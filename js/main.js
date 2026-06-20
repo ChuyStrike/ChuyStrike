@@ -198,7 +198,8 @@ const UtilsModule = (() => {
      * @param {string} type - Tipo de log (log, warn, error)
      */
     const log = (message, type = 'log') => {
-        if (process.env.NODE_ENV !== 'production') {
+        const isProduction = typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'production';
+        if (!isProduction) {
             console[type](message);
         }
     };
